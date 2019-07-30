@@ -1,0 +1,74 @@
+priority 100
+snippet newroot "New ROOT Macro" bA
+void `!p snip.rv = fn.split('.')[0]`()
+{
+	$0
+}
+endsnippet
+
+snippet hi "TH1D" w
+TH1D *$1 = new TH1D("${2:$1}", "${3:$2}", $4, $5, $6);
+endsnippet
+
+snippet hi2 "TH2D" w
+TH2D *$1 = new TH2D("$2", "$3", $4, $5, $6, $7, $8, $9);
+endsnippet
+
+snippet "([\w\d_\(\)]+)`([\w\d_\(\)]+)" "Expand the function call" rA
+`!p snip.rv = match.group(1) + ' -> ' + match.group(2)`
+endsnippet
+
+snippet for "for loop (for)" bA
+for (${4:int} ${2:i} = 0; $2 < ${1:count}; ${3:++$2}) 
+{
+	${VISUAL}$0
+}
+endsnippet
+
+snippet if "if block" bA
+if($1)
+{
+	$2
+}
+endsnippet
+
+priority 10
+
+snippet "new([\w\d_]+) ([\w\d_]+) (.*)" "new ROOT object" r
+`!p 
+ot = match.group(1)
+ot = "T" + ot.capitalize()
+on = match.group(2)
+end_quote = True
+par = ''
+if match.group(3) != '':
+	for c in match.group(3):
+		if c == ' ':
+			if end_quote:
+				par += ', '
+			else:
+				par += c
+		else:
+			par += c
+			if c == '"':
+				end_quote =  not end_quote
+		
+	snip.rv = ot + ' *' + on + ' = new ' + ot + '(' + par + ');'
+else:
+	snip.rv = ot + ' *' + on + ' = '
+	
+`$0
+endsnippet
+
+snippet "to([\w\d_]+)" "convert ROOT object" r
+`!p snip.rv = '(T' + match.group(1).capitalize() + " *)"`
+endsnippet
+
+snippet [] "left bracket" iA
+($1)$0
+endsnippet
+
+snippet [[ "right bracket" iA
+"$1"$0
+endsnippet
+
