@@ -37,7 +37,11 @@ priority 10
 snippet "new([\w\d_]+) ([\w\d_]+) (.*)" "new ROOT object" r
 `!p 
 ot = match.group(1)
-ot = "T" + ot.capitalize()
+if ot[0].islower():
+	ot = "T" + ot.capitalize()
+else:
+	ot = "Roo" + ot.capitalize()
+
 on = match.group(2)
 end_quote = True
 par = ''
