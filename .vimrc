@@ -59,4 +59,5 @@ syntax enable
 set background=dark
 colorscheme solarized
 set hlsearch
-nnoremap <f1> @a 
+nnoremap <F1> @a
+map <F2> <plug>NERDCommenterComment
