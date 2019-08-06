@@ -43,6 +43,7 @@ Plug 'vim-airline/vim-airline'
 
 Plug 'tpope/vim-sensible'
 
+Plug 'scrooloose/nerdcommenter'
 call plug#end()
 
 syntax on
@@ -58,4 +59,4 @@ syntax enable
 set background=dark
 colorscheme solarized
 set hlsearch
-nnoremap 1 @a 
+nnoremap <f1> @a 
