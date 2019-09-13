@@ -55,9 +55,9 @@ snippet // "Fraction" iA
 \\frac{$1}{$2}$0
 endsnippet
 
-snippet '((\d+)|(\d*)(\\)?([A-Za-z]+)((\^|_)(\{\d+\}|\d))*)/' "Fraction" wrA
-\\frac{`!p snip.rv = match.group(1)`}{$1}$0
-endsnippet
+#snippet '((\d+)|(\d*)(\\)?([A-Za-z]+)((\^|_)(\{\d+\}|\d))*)/' "Fraction" wrA
+#\\frac{`!p snip.rv = match.group(1)`}{$1}$0
+#endsnippet
 
 priority 1000
 snippet '^.*\)/' "() Fraction" wrA
@@ -74,9 +74,9 @@ snip.rv = stripped[0:i] + "\\frac{" + stripped[i+1:-1] + "}"
 `{$1}$0
 endsnippet
 
-snippet / "Fraction" iA
-\\frac{${VISUAL}}{$1}$0
-endsnippet
+#snippet / "Fraction" iA
+#\\frac{${VISUAL}}{$1}$0
+#endsnippet
 
 priority 1000
 snippet math "mathematica block" w
@@ -153,7 +153,7 @@ snippet it "mathematica block" w
 \begin{table}[htbp]
    \centering
    %\topcaption{}
-   \begin{tabular}{@{} $1 @{}}
+   \begin{tabular}{ $1 }
       \toprule
       $2
       \midrule
@@ -165,7 +165,7 @@ snippet it "mathematica block" w
 endsnippet
 
 snippet uni "Unit" w
-\ \mathrm{$0}
+\ \mathrm{$1}$0
 endsnippet
 
 snippet newbeamer "Beamer Template" w
@@ -196,11 +196,18 @@ snippet newbeamer "Beamer Template" w
 \usepackage{xltxtra}
 \usepackage{siunitx}
 \usepackage[BoldFont,SlantFont,CJKchecksingle]{xeCJK}
+\usepackage{natbib}
+\usepackage{bibentry}
+\nobibliography*
+
 \setCJKmainfont{黑体-简}
 \setCJKmonofont{宋体-简}
 \setCJKsansfont{楷体-简}
 \def\mathbi#1{\textbf{\em #1}}
 \def\diff#1{\textcolor{red}{\underline{#1}}}
+\newcommand*{\bibfnamefont}[1]{#1}
+\newcommand*{\bibnamefont}[1]{#1}
+\newcommand*{\eprint}[1][]{#1}%
 
 \title{$1}
 \author{Yangjie Su}
@@ -218,6 +225,11 @@ snippet newbeamer "Beamer Template" w
 	$4
 }
 
+\begin{frame}
+    \frametitle{References}
+    \bibliographystyle{apsrev}
+    \bibliography{your.bib}
+\end{frame}
 \end{document}
 
 endsnippet
@@ -225,4 +237,48 @@ endsnippet
 post_jump "create_row_placeholders(snip)"
 snippet "(\d+)tr" "latex table row variable" r
 `!p snip.rv = match.group(1)`
+endsnippet
+
+snippet newnote "Notes" w
+\documentclass[black,pad,cn]{elegantnote}
+\usepackage{minted}
+\usepackage{subfigure}
+\usepackage{url}
+\usepackage{enumitem,amssymb}
+\setitemize{label=\usebeamerfont*{itemize item}
+\usebeamercolor[fg]{itemize item}
+\usebeamertemplate{itemize item}}
+\newlist{checklist}{itemize}{1}
+\setlist[checklist]{label=$\square$}
+\usepackage{pifont}
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+\newcommand{\done}{\rlap{$\square$}{\raisebox{2pt} {\large\hspace{1pt}\cmark}}\hspace{-2.5pt}}
+\newcommand{\wontfix}{\rlap{$\square$}{\large\hspace{1pt}\xmark}}
+\title{\bfseries $1}
+\author{${2:Yangjie Su}}
+\date{\small\itshape 创建时间: `date "+%Y年%m月%d日"` \\\\ 更新时间: \today}
+\begin{document}
+{\color{ecolor}{\maketitle}}
+\section{$3}
+$0
+
+endsnippet
+
+snippet t
+`!p 
+lines = snip.v.text.split('\n')
+snip.rv = lines[0].strip().replace(' ', ' & ') + r'\\'
+for lineno in range(1,len(lines)):
+	if lines[lineno].strip() != '':
+		rel = lines[lineno].strip()
+		rel = rel.replace(' ', ' & ')
+		snip += rel + r' \\'
+`
+endsnippet
+
+snippet fra "new frame" bA
+\frame{
+	$0 
+}
 endsnippet

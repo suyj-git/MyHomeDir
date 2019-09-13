@@ -61,3 +61,5 @@ colorscheme solarized
 set hlsearch
 nnoremap <F1> @a
 map <F2> <plug>NERDCommenterComment
+"setlocal spell spelllang=en_us
+inoremap <C-s> <c-g>u<Esc>[s1z=`]a<c-g>u
