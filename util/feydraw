@@ -1,0 +1,22 @@
+for file in "$@"; do
+	if ! test -f $file ;then
+		echo "Please check whether $file exists."
+	else
+		echo "Processing $file ....."
+		TMP=feydraw_tmp_$RANDOM
+		cat ~/util/feynman_diagram_head $file ~/util/feynman_diagram_tail > $TMP.tex
+		/Library/TeX/texbin/latex -interaction=batchmode -shell-escape $TMP.tex >/dev/null 2>&1
+		if ! test -f $TMP-figure0.pdf ; then
+			echo "Problem processing $file  Please make sure it's written correctly."
+			continue
+		fi
+		PDFNAME=`echo $file|cut -d . -f1`.pdf
+		mv $TMP-figure0.pdf $PDFNAME
+		rm -f $TMP*
+		echo "Successfully create $PDFNAME"
+	fi
+done
+
+#cat feynman_diagram_head feynman_diagram feynman_diagram_tail > $TMP.tex
+#/Library/TeX/texbin/latex -shell-escape $TMP.tex
+#mv $TMP-figure0.pdf diagram.pdf

@@ -1,0 +1,15 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{tikz-feynman}
+\usepackage{amsmath}
+
+ %set up externalization
+\usetikzlibrary{external}
+\tikzset{external/system call={/Library/TeX/texbin/lualatex \tikzexternalcheckshellescape -halt-on-error -interaction=batchmode -jobname "\image" "\texsource";
+/usr/local/bin/pdf2ps "\image".pdf
+%/Library/TeX/texbin/pdf2ps -o "\image".ps "\image".dvi;
+%/Library/TeX/texbin/ps2eps "\image.ps"
+}}
+\tikzexternalize
+
+\begin{document}
