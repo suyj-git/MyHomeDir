@@ -1,3 +1,7 @@
+if [ $# -eq 0 ]; then
+	cat ~/util/feynman_diagram_template.tex
+fi
+
 for file in "$@"; do
 	if ! test -f $file ;then
 		echo "Please check whether $file exists."
@@ -8,6 +12,7 @@ for file in "$@"; do
 		/Library/TeX/texbin/latex -interaction=batchmode -shell-escape $TMP.tex >/dev/null 2>&1
 		if ! test -f $TMP-figure0.pdf ; then
 			echo "Problem processing $file  Please make sure it's written correctly."
+		rm -f $TMP*
 			continue
 		fi
 		PDFNAME=`echo $file|cut -d . -f1`.pdf
@@ -17,6 +22,3 @@ for file in "$@"; do
 	fi
 done
 
-#cat feynman_diagram_head feynman_diagram feynman_diagram_tail > $TMP.tex
-#/Library/TeX/texbin/latex -shell-escape $TMP.tex
-#mv $TMP-figure0.pdf diagram.pdf

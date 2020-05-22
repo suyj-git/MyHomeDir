@@ -97,26 +97,26 @@ snip.rv = subprocess.check_output(['wolframscript', '-code', code])
 endsnippet
 
 priority 10
-snippet "bar" "bar" ri
+snippet "bar" "bar" r
 \overline{$1}$0
 endsnippet
 
 priority 100
-snippet "([a-zA-Z])bar" "bar" riA
+snippet "([a-zA-Z])bar" "bar" rA
 \overline{`!p snip.rv=match.group(1)`}
 endsnippet
 
 priority 10
-snippet "hat" "hat" riA
+snippet "hat" "hat" rA
 \hat{$1}$0
 endsnippet
 
 priority 100
-snippet "([a-zA-Z])hat" "hat" riA
+snippet "([a-zA-Z])hat" "hat" rA
 \hat{`!p snip.rv=match.group(1)`}
 endsnippet
 
-snippet "(\\?\w+)(,\.|\.,)" "Vector postfix" riA
+snippet "(\\?\w+)(,\.|\.,)" "Vector postfix" rA
 \vec{`!p snip.rv=match.group(1)`}
 endsnippet
 
@@ -183,13 +183,7 @@ endsnippet
 snippet newbeamer "Beamer Template" w
 \documentclass{beamer}
 
-\usefonttheme[onlymath]{serif}
-%\useoutertheme{miniframes}
-\setbeamertemplate{footline}[page number]
-\setbeamertemplate{navigation symbols}{}
-%\setbeamertemplate{section page}{\beamercolorbox{\insertsection}}
-\setbeamersize{text margin left = 0.1cm, text margin right=0.1cm}
-% \usepackage{beamerthemesplit} // Activate for custom appearance
+\usemytheme{mytheme}
 \usepackage{ulem}
 \usepackage{minted}
 \usepackage{diagbox}
@@ -235,6 +229,7 @@ snippet newbeamer "Beamer Template" w
 
 \frame{\titlepage}
 
+\section*{Outline}
 \frame{\tableofcontents \frametitle{Outline}}
 
 \section{$3}
