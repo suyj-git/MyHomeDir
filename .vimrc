@@ -7,31 +7,43 @@ let g:vimtex_quickfix_mode=0
 let g:vimtex_view_automatic=1
 set conceallevel=1
 let g:tex_conceal='abdmg'
-let g:vimtex_compiler_latexmk_engines = {
-    \ '_'                : '-pdfxe',
-    \ 'pdflatex'         : '-pdfxe',
-    \ 'dvipdfex'         : '-pdfdvi',
-    \ 'lualatex'         : '-lualatex',
-    \ 'xelatex'          : '-xelatex',
-    \ 'context (pdftex)' : '-pdf -pdflatex=texexec',
-    \ 'context (luatex)' : '-pdf -pdflatex=context',
-    \ 'context (xetex)'  : '-pdf -pdflatex=''texexec --xtx''',
-    \}
 let g:vimtex_compiler_latexmk = {
-    \ 'backend' : "process",
-    \ 'background' : 1,
-    \ 'build_dir' : '',
-    \ 'callback' : 1,
-    \ 'continuous' : 1,
-    \ 'executable' : 'latexmk',
-    \ 'options' : [
-    \   '-latexoption=-shell-escape',
-    \   '-verbose',
-    \   '-file-line-error',
-    \   '-synctex=1',
-    \   '-interaction=nonstopmode',
-    \ ],
-    \}
+	\ 'backend' : "process",
+	\ 'background' : 1,
+	\ 'build_dir' : '',
+	\ 'callback' : 1,
+	\ 'continuous' : 1,
+	\ 'executable' : 'latexmk',
+	\ 'options' : [
+	\   '-xelatex',
+	\   '-f',
+	\ ],
+	\}
+"let g:vimtex_compiler_latexmk_engines = {
+    "\ '_'                : '-pdfxe',
+    "\ 'pdflatex'         : '-pdfxe',
+    "\ 'dvipdfex'         : '-pdfdvi',
+    "\ 'lualatex'         : '-lualatex',
+    "\ 'xelatex'          : '-xelatex',
+    "\ 'context (pdftex)' : '-pdf -pdflatex=texexec',
+    "\ 'context (luatex)' : '-pdf -pdflatex=context',
+    "\ 'context (xetex)'  : '-pdf -pdflatex=''texexec --xtx''',
+    "\}
+"let g:vimtex_compiler_latexmk = {
+    "\ 'backend' : "process",
+    "\ 'background' : 1,
+    "\ 'build_dir' : '',
+    "\ 'callback' : 1,
+    "\ 'continuous' : 1,
+    "\ 'executable' : 'latexmk',
+    "\ 'options' : [
+    "\   '-latexoption=-shell-escape',
+    "\   '-verbose',
+    "\   '-file-line-error',
+    "\   '-synctex=1',
+    "\   '-interaction=nonstopmode',
+    "\ ],
+    "\}
 
 Plug 'sirver/ultisnips'
 let g:UltiSnipsExpandTrigger = '<tab>'
